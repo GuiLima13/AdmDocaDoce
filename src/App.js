@@ -1,4 +1,9 @@
 import React,{useState} from 'react';
+
+
+import api from './services/api'
+
+
 function App() {
     const [nome,setNome] = useState();
     const [email,setEmail] = useState();
@@ -9,20 +14,33 @@ function App() {
     const  handleClick = async (e)=>{
       e.preventDefault();
 
-      const info = JSON.stringify({
+      const info = {
         nome,
         email,
         senha,
         telefone,
         cpf,
-    })
+    }
+
+    try {
+
+      const res = await api.post('/usuario',info);
+
+      //pegando o id que ele retona e mostrando ao usuario
+      alert(`${res}`);
+
+  } catch (error) {
+      alert('Erro ao cadastrar usuario');
+  }
+
+    /*
     try{
       const resposta = await fetch("http://apidocadoce.herokuapp.com/usuario",
       {
-          headers:{
-              "Content-Type":["application/json", 'Authorization'],
-              
-          },
+          headers:[
+            ["Content-Type", "application/json"],
+            ['Content-Type', 'Authorization']
+          ],
           method:"POST",
           body:info
       }
@@ -41,6 +59,7 @@ function App() {
 
     }catch(e){
     }
+    */
    
 
  
