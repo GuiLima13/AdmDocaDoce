@@ -20,13 +20,14 @@ function App() {
       const resposta = await fetch("http://apidocadoce.herokuapp.com/usuario",
       {
           headers:{
-              "Content-Type":"application/json",
+              "Content-Type":["application/json", 'Authorization'],
+              
           },
           method:"POST",
           body:info
       }
+      
     );
-
     if(resposta.status === 201){
       alert("Cadastrado com sucesso")
       setNome("");
@@ -37,13 +38,12 @@ function App() {
     }else{
       alert("Não foi possivel cadastrar item")
   }
+
     }catch(e){
-      console.log(e)
     }
    
 
-    
-
+ 
     }
   return (
     <div className="App">
